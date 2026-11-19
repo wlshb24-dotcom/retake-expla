@@ -16,6 +16,9 @@
     --green: #198754;
     --green-bg: #eefbf3;
     --green-line: #9acdb1;
+    --amber-bg: #fffbeb;
+    --amber-line: #fcd34d;
+    --amber-ink: #92400e;
   }
 
   * {
@@ -24,16 +27,19 @@
 
   body {
     margin: 0;
-    background: #eef3f8;
+    background: #e9eff6;
     color: var(--ink);
     font-family: "Noto Sans TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
-    line-height: 1.46;
+    font-size: 15px;
+    line-height: 1.55;
   }
 
-  /* 螢幕預覽專用頂部工具列（列印與匯出 PDF 時自動隱藏） */
+  /* ==========================================================================
+   * 螢幕預覽頂部工具列（列印與匯出 PDF 時自動隱藏）
+   * ========================================================================== */
   .toolbar {
     max-width: 920px;
-    margin: 16px auto 0;
+    margin: 14px auto 0;
     padding: 10px 16px;
     background: #ffffff;
     border: 1px solid var(--line);
@@ -52,7 +58,7 @@
     gap: 8px;
     font-size: 13px;
     color: var(--navy);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .toolbar-hint {
@@ -126,32 +132,42 @@
     transform: translateY(0);
   }
 
-  /* 主文件紙張容器 */
-  .page {
+  /* ==========================================================================
+   * 兩頁式 A4 紙張容器
+   * ========================================================================== */
+  .doc-wrapper {
     max-width: 920px;
-    margin: 14px auto 24px;
-    background: #ffffff;
-    padding: 24px 32px 18px;
-    border-radius: 12px;
-    box-shadow: 0 8px 28px rgba(29, 53, 87, 0.08);
+    margin: 14px auto 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
-  header {
+  .page-sheet {
+    background: #ffffff;
+    padding: 26px 32px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(29, 53, 87, 0.08);
+    position: relative;
+  }
+
+  /* 第 1 頁頁首 */
+  header.main-header {
     text-align: center;
     border-bottom: 3px solid var(--blue);
     padding-bottom: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 13px;
   }
 
   .kicker {
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 2.5px;
     color: var(--blue);
     font-weight: 700;
   }
 
   h1 {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--navy);
     margin: 3px 0;
     letter-spacing: 0.5px;
@@ -159,7 +175,35 @@
 
   .subtitle {
     color: var(--muted);
+    font-size: 13.5px;
+  }
+
+  /* 第 2 頁頁首 */
+  header.sub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 2.5px solid var(--blue);
+    padding-bottom: 8px;
+    margin-bottom: 13px;
+  }
+
+  .sub-header-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .sub-header-badge {
     font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    background: var(--pale);
+    border: 1px solid #b9d4ee;
+    padding: 2.5px 10px;
+    border-radius: 999px;
   }
 
   /* 填報系統網址區塊 */
@@ -168,8 +212,8 @@
     border: 1px solid #b9d4ee;
     border-left: 4px solid var(--blue);
     border-radius: 8px;
-    padding: 8px 12px;
-    margin-bottom: 11px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -184,10 +228,10 @@
   }
 
   .url-label {
-    font-size: 11.5px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--navy);
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -196,15 +240,15 @@
   .url-badge {
     background: var(--blue);
     color: #ffffff;
-    font-size: 10px;
-    padding: 1px 6px;
+    font-size: 11px;
+    padding: 1.5px 7px;
     border-radius: 4px;
     font-weight: 700;
   }
 
   .url-link {
     display: inline-block;
-    font-size: 11px;
+    font-size: 12.5px;
     color: #165594;
     font-weight: 600;
     text-decoration: underline;
@@ -217,9 +261,9 @@
     border: 1px solid #9cb9d6;
     color: var(--navy);
     font-family: inherit;
-    font-size: 11px;
+    font-size: 12.5px;
     font-weight: 700;
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
     white-space: nowrap;
@@ -231,12 +275,12 @@
 
   /* 本次開課區間與排課限制公告區塊 */
   .schedule-banner {
-    background: #fffbeb;
-    border: 1px solid #fcd34d;
+    background: var(--amber-bg);
+    border: 1px solid var(--amber-line);
     border-left: 4px solid #d97706;
-    border-radius: 9px;
-    padding: 8px 12px;
-    margin-bottom: 11px;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
     break-inside: avoid;
   }
 
@@ -250,9 +294,9 @@
   }
 
   .schedule-title {
-    font-size: 12.5px;
+    font-size: 14px;
     font-weight: 700;
-    color: #92400e;
+    color: var(--amber-ink);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -261,8 +305,8 @@
   .schedule-badge {
     background: #d97706;
     color: #ffffff;
-    font-size: 10px;
-    padding: 1px 6px;
+    font-size: 11px;
+    padding: 1.5px 7px;
     border-radius: 4px;
     font-weight: 700;
   }
@@ -271,35 +315,35 @@
     background: #ffffff;
     border: 1px solid #fde68a;
     color: #1e3a8a;
-    font-size: 11px;
+    font-size: 12.5px;
     font-weight: 700;
-    padding: 2.5px 9px;
-    border-radius: 6px;
+    padding: 3px 10px;
+    border-radius: 5px;
   }
 
   .schedule-subnote {
-    font-size: 10.5px;
+    font-size: 12px;
     color: #78350f;
-    margin: 0 0 5px;
+    margin: 2px 0 6px;
   }
 
   .schedule-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3.5px 10px;
+    gap: 6px 14px;
     background: #ffffff;
     border: 1px solid #fde68a;
     border-radius: 6px;
-    padding: 6px 9px;
+    padding: 8px 11px;
   }
 
   .schedule-item {
-    font-size: 10px;
+    font-size: 12.2px;
     color: #334155;
     display: flex;
     align-items: baseline;
     gap: 5px;
-    line-height: 1.36;
+    line-height: 1.46;
   }
 
   .schedule-dot {
@@ -317,53 +361,148 @@
     color: #334155;
   }
 
-  /* 四大操作步驟網格 */
-  .steps {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  /* ==========================================================================
+   * 步驟流程導引條與帶箭頭的四大步驟
+   * ========================================================================== */
+  .step-flow-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f4f8fc;
+    border: 1px solid #cfe0f2;
+    border-radius: 8px;
+    padding: 7px 14px;
+    margin-bottom: 12px;
+    gap: 6px;
+    break-inside: avoid;
   }
 
-  .step,
-  .extra-card,
-  .notice-box {
-    border: 1px solid var(--line);
+  .flow-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--navy);
+    background: #ffffff;
+    border: 1px solid #bfd5eb;
+    padding: 3.5px 11px;
+    border-radius: 999px;
+  }
+
+  .flow-chip span.c-num {
+    background: var(--blue);
+    color: #ffffff;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    font-size: 11px;
+  }
+
+  .flow-arrow {
+    color: var(--blue);
+    font-weight: 900;
+    font-size: 15px;
+    user-select: none;
+  }
+
+  /* 步驟列排版（含橫向箭頭與列間銜接指示） */
+  .steps-row {
+    display: grid;
+    grid-template-columns: 1fr 26px 1fr;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .row-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue);
+    font-weight: 900;
+    font-size: 17px;
+    user-select: none;
+  }
+
+  .row-bridge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 8px 0;
+    color: #2c6aa6;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .row-bridge::before,
+  .row-bridge::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    border-top: 1.5px dashed #b7cfe6;
+  }
+
+  .step {
+    border: 1.5px solid #c3d5e8;
+    border-top: 3px solid var(--blue);
     border-radius: 10px;
-    padding: 10px 12px;
+    padding: 12px 14px;
     background: #ffffff;
     break-inside: avoid;
+    display: flex;
+    flex-direction: column;
   }
 
   .stephead {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+
+  .stephead-left {
+    display: flex;
+    align-items: center;
     gap: 8px;
-    margin-bottom: 4px;
   }
 
   .num {
-    width: 23px;
-    height: 23px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: var(--blue);
     color: #ffffff;
     display: grid;
     place-items: center;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 13px;
     flex-shrink: 0;
   }
 
+  .step-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: #205b91;
+    background: #e7f2fc;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
   h2 {
-    font-size: 14.5px;
+    font-size: 16.5px;
     color: var(--navy);
     margin: 0;
   }
 
   p {
-    margin: 3.5px 0;
-    font-size: 11.2px;
+    margin: 5px 0;
+    font-size: 13.5px;
     color: var(--ink);
+    line-height: 1.52;
   }
 
   /* 系統介面示意框 */
@@ -371,15 +510,15 @@
     border: 1px solid #c8d6e5;
     border-radius: 7px;
     background: #f8fbfe;
-    padding: 6px 8px;
-    margin: 5px 0 4px;
+    padding: 8px 11px;
+    margin: 6px 0;
   }
 
   .mocktitle {
-    font-size: 9.5px;
+    font-size: 11px;
     color: #536a82;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -389,15 +528,15 @@
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    margin: 3.5px 0;
+    margin: 4px 0;
   }
 
   .field {
     background: #ffffff;
     border: 1px solid #bdcddd;
     border-radius: 5px;
-    padding: 3.5px 7px;
-    font-size: 9.8px;
+    padding: 5px 8px;
+    font-size: 11.8px;
     color: #526477;
     flex: 1;
     min-width: 75px;
@@ -406,16 +545,38 @@
   .field b {
     display: block;
     color: #263e57;
-    font-size: 8.8px;
-    margin-bottom: 1px;
+    font-size: 10.5px;
+    margin-bottom: 1.5px;
+  }
+
+  .course-info-card {
+    background: #eef5fd;
+    border: 1px solid #bfd8f2;
+    border-radius: 5px;
+    padding: 6px 9px;
+    font-size: 11.8px;
+    color: #1e3a8a;
+    margin: 5px 0;
+    line-height: 1.45;
+  }
+
+  .intent-badge {
+    display: inline-block;
+    background: #ffffff;
+    border: 1px solid #93c5fd;
+    color: #1d4ed8;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
   }
 
   .select {
     background: #ffffff;
     border: 1px solid #bdcddd;
     border-radius: 5px;
-    padding: 3.5px 8px;
-    font-size: 9.8px;
+    padding: 5px 8px;
+    font-size: 11.8px;
     color: #344b62;
     flex: 1;
     display: flex;
@@ -429,10 +590,10 @@
     color: #205b91;
     border: 1px solid #c2dcf5;
     border-radius: 4px;
-    padding: 1.5px 5px;
-    font-size: 9.2px;
+    padding: 2px 6.5px;
+    font-size: 11px;
     font-weight: 600;
-    margin: 1.5px 1px;
+    margin: 2px 1px;
   }
 
   .pill.active {
@@ -441,11 +602,55 @@
     color: #1d4ed8;
   }
 
+  /* 自學班上課方式切換示意 */
+  .mode-switch-box {
+    background: #ffffff;
+    border: 1px solid #bfd5eb;
+    border-radius: 5px;
+    padding: 5px 9px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-size: 11.5px;
+  }
+
+  .mode-default {
+    color: #166534;
+    background: #dcfce7;
+    padding: 1.5px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .mode-checkbox {
+    color: #1e3a8a;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* 時段人數提醒示意 */
+  .slot-warn-mock {
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-left: 3px solid #f59e0b;
+    border-radius: 4px;
+    padding: 5px 8px;
+    margin-top: 5px;
+    font-size: 11.2px;
+    color: #92400e;
+    line-height: 1.42;
+  }
+
   .btn {
     display: inline-block;
     border-radius: 5px;
-    padding: 3.5px 9px;
-    font-size: 9.8px;
+    padding: 4.5px 10px;
+    font-size: 11.5px;
     font-weight: 700;
     margin-right: 4px;
   }
@@ -466,39 +671,59 @@
     background: #ffffff;
   }
 
-  /* 兩項進階功能說明區（含畫面示意） */
+  /* ==========================================================================
+   * 第 2 頁區塊樣式：進階功能、多班次流程圖、注意事項
+   * ========================================================================== */
   .section-label {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--navy);
-    margin: 11px 0 6px;
-    padding-left: 8px;
+    margin: 0 0 9px;
+    padding-left: 9px;
     border-left: 3.5px solid var(--blue);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .section-subtag {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--muted);
   }
 
   .features-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .extra-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #ffffff;
+    break-inside: avoid;
   }
 
   .extra-card h3 {
-    font-size: 13.5px;
+    font-size: 15px;
     color: #1d558a;
-    margin: 0 0 3px;
+    margin: 0 0 4px;
     display: flex;
     align-items: center;
     gap: 6px;
+    flex-wrap: wrap;
   }
 
   .tag-ref {
-    font-size: 9.2px;
+    font-size: 10.5px;
     background: #e6f0fa;
     color: #205b91;
-    padding: 1px 6px;
+    padding: 1.5px 7px;
     border-radius: 4px;
     font-weight: 600;
   }
@@ -508,47 +733,47 @@
     background: #ffffff;
     border: 1px solid #cbd9e8;
     border-radius: 7px;
-    padding: 6px 10px;
+    padding: 8px 12px;
     text-align: center;
   }
 
   .check-circle {
-    width: 19px;
-    height: 19px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     background: #dcfce7;
     color: #16a34a;
-    font-size: 10.5px;
+    font-size: 12px;
     font-weight: 700;
     display: inline-grid;
     place-items: center;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
 
   .modal-heading {
-    font-size: 10.8px;
+    font-size: 12.5px;
     font-weight: 700;
     color: #15803d;
   }
 
   .modal-sub {
-    font-size: 8.8px;
+    font-size: 10.5px;
     color: #5c6d7e;
-    margin: 1px 0 4px;
+    margin: 2px 0 6px;
   }
 
   .modal-btn-stack {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    max-width: 185px;
+    gap: 4px;
+    max-width: 210px;
     margin: 0 auto;
   }
 
   .m-btn {
-    font-size: 9.2px;
+    font-size: 11px;
     font-weight: 700;
-    padding: 3px 8px;
+    padding: 3.5px 9px;
     border-radius: 4px;
     text-align: center;
   }
@@ -577,15 +802,15 @@
     background: #ffffff;
     border: 1px solid #d5e1ee;
     border-radius: 5px;
-    padding: 2px;
-    margin-bottom: 4px;
-    font-size: 9.2px;
+    padding: 2.5px;
+    margin-bottom: 5px;
+    font-size: 11px;
     text-align: center;
     font-weight: 700;
   }
 
   .school-tab {
-    padding: 2.5px 4px;
+    padding: 3px 5px;
     color: #526477;
     border-radius: 4px;
   }
@@ -599,44 +824,161 @@
     background: #ffffff;
     border: 1px solid #d5e1ee;
     border-radius: 5px;
-    padding: 5px 7px;
+    padding: 7px 9px;
   }
 
   .school-panel-title {
-    font-size: 10px;
+    font-size: 11.8px;
     font-weight: 700;
     color: #1e293b;
   }
 
   .school-panel-desc {
-    font-size: 8.6px;
+    font-size: 10.5px;
     color: #64748b;
-    margin: 1px 0 3.5px;
+    margin: 2px 0 5px;
   }
 
-  /* 填報與重新登入請留意（2x2 四宮格） */
-  .notice-box {
-    margin-top: 10px;
-    background: #f8fbfe;
+  /* ==========================================================================
+   * 多班次共同排課機制（視覺流程圖 + 規則清單）
+   * ========================================================================== */
+  .multiclass-box {
+    border: 1.5px solid #bfd5eb;
+    background: #f8fbff;
+    border-radius: 10px;
+    padding: 13px 15px;
+    margin-bottom: 14px;
+    break-inside: avoid;
   }
 
-  .notice-box h3 {
+  .multiclass-intro {
     font-size: 13px;
+    color: var(--ink);
+    margin: 0 0 9px;
+  }
+
+  .mc-diagram {
+    display: grid;
+    grid-template-columns: 1fr 28px 1fr 28px 1fr;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 10px;
+  }
+
+  .mc-node {
+    background: #ffffff;
+    border: 1px solid #bfd5eb;
+    border-radius: 8px;
+    padding: 9px 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .mc-node.class1 {
+    border-top: 3px solid var(--blue);
+  }
+
+  .mc-node.sync {
+    background: #eef6ff;
+    border: 1px dashed #60a5fa;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .mc-node.class2 {
+    border-top: 3px solid #0d9488;
+  }
+
+  .mc-node-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    width: fit-content;
+  }
+
+  .mc-node.class1 .mc-node-badge {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  .mc-node.class2 .mc-node-badge {
+    background: #ccfbf1;
+    color: #115e59;
+  }
+
+  .mc-node-title {
+    font-size: 13px;
+    font-weight: 700;
     color: var(--navy);
-    margin: 0 0 6px;
+    margin-bottom: 4px;
+  }
+
+  .mc-node-desc {
+    font-size: 11.8px;
+    color: var(--muted);
+    line-height: 1.46;
+  }
+
+  .mc-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue);
+    font-weight: 900;
+    font-size: 17px;
+  }
+
+  .mc-rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px 14px;
+    background: #ffffff;
+    border: 1px solid #d6e4f2;
+    border-radius: 7px;
+    padding: 10px 13px;
+  }
+
+  .mc-rule-item {
+    font-size: 12.2px;
+    color: var(--ink);
+    line-height: 1.48;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .mc-rule-num {
+    font-weight: 700;
+    color: var(--blue);
+    flex-shrink: 0;
+  }
+
+  /* ==========================================================================
+   * 填報、暫存與重新登入注意事項（四宮格）
+   * ========================================================================== */
+  .notice-box {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #f8fbfe;
+    break-inside: avoid;
   }
 
   .notice-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 7px;
+    gap: 9px;
   }
 
   .notice-item {
     background: #ffffff;
     border: 1px solid #dce7f2;
     border-radius: 6px;
-    padding: 6px 9px;
+    padding: 8px 11px;
   }
 
   .notice-item.important-note {
@@ -645,54 +987,162 @@
     border-left: 3.5px solid #1d4ed8;
   }
 
-  .notice-item strong {
+  .notice-item > strong {
     display: block;
-    font-size: 10.8px;
+    font-size: 13px;
     color: #205b91;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
 
-  .notice-item.important-note strong {
+  .notice-item.important-note > strong {
     color: #1e3a8a;
   }
 
   .notice-item small {
     display: block;
-    font-size: 9.8px;
+    font-size: 12px;
     color: var(--muted);
-    line-height: 1.38;
+    line-height: 1.5;
   }
 
-  footer {
+  .notice-item small strong {
+    display: inline;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  footer.page-footer {
     text-align: center;
     color: #778696;
-    font-size: 9.2px;
-    margin-top: 8px;
+    font-size: 11px;
+    margin-top: 11px;
+    padding-top: 7px;
+    border-top: 1px solid #e6edf5;
   }
 
-  /* 手機響應式調整 */
-  @media (max-width: 720px) {
+  /* ==========================================================================
+   * 手機響應式調整（針對小螢幕進一步放大字級與按鈕觸控區）
+   * ========================================================================== */
+  @media (max-width: 760px) {
+    body {
+      font-size: 16px;
+    }
     .toolbar {
       margin: 10px 12px 0;
     }
-    .page {
+    .doc-wrapper {
       margin: 10px 0 0;
-      padding: 18px 14px;
+      gap: 12px;
+    }
+    .page-sheet {
+      padding: 20px 16px;
       border-radius: 0;
       box-shadow: none;
     }
-    .steps,
+    h1 {
+      font-size: 22px;
+    }
+    .subtitle {
+      font-size: 14px;
+    }
+    .url-label {
+      font-size: 14px;
+    }
+    .url-link {
+      font-size: 13px;
+    }
+    .copy-url-btn {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      text-align: center;
+    }
+    .schedule-title {
+      font-size: 15px;
+    }
+    .schedule-allowed,
+    .schedule-subnote {
+      font-size: 13px;
+    }
+    .schedule-item {
+      font-size: 13.5px;
+      line-height: 1.52;
+    }
+    .step-flow-bar {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .flow-chip {
+      font-size: 13px;
+    }
+    .steps-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .row-connector {
+      transform: rotate(90deg);
+      padding: 2px 0;
+    }
+    h2 {
+      font-size: 17.5px;
+    }
+    p {
+      font-size: 14.5px;
+      line-height: 1.58;
+    }
+    .field,
+    .select,
+    .course-info-card {
+      font-size: 13px;
+    }
+    .mode-switch-box,
+    .slot-warn-mock {
+      font-size: 12.5px;
+    }
+    .section-label {
+      font-size: 16px;
+    }
+    .extra-card h3 {
+      font-size: 16px;
+    }
+    .multiclass-intro {
+      font-size: 14px;
+    }
+    .mc-node-title {
+      font-size: 14px;
+    }
+    .mc-node-desc {
+      font-size: 13px;
+    }
+    .mc-rule-item {
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+    .notice-item > strong {
+      font-size: 14px;
+    }
+    .notice-item small {
+      font-size: 13px;
+      line-height: 1.55;
+    }
     .features-grid,
     .notice-grid,
-    .schedule-grid {
+    .schedule-grid,
+    .mc-rules-grid {
       grid-template-columns: 1fr;
     }
-    h1 {
-      font-size: 20px;
+    .mc-diagram {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+    .mc-arrow {
+      transform: rotate(90deg);
     }
   }
 
-  /* A4 列印與 PDF 輸出最佳化 */
+  /* ==========================================================================
+   * A4 雙頁列印與 PDF 匯出最佳化（維持標準 A4 兩頁緊湊版面）
+   * ========================================================================== */
   @page {
     size: A4 portrait;
     margin: 7mm 9mm;
@@ -701,6 +1151,8 @@
   @media print {
     body {
       background: #ffffff;
+      font-size: 11px;
+      line-height: 1.44;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
@@ -712,67 +1164,137 @@
       display: none !important;
     }
 
-    .page {
+    .doc-wrapper {
       max-width: 100%;
       width: 100%;
       margin: 0;
+      gap: 0;
+    }
+
+    .page-sheet {
       padding: 0;
+      margin: 0;
       box-shadow: none;
       border-radius: 0;
     }
 
-    header {
-      padding-bottom: 7px;
-      margin-bottom: 8px;
+    .page-sheet.page-one {
+      page-break-after: always;
+      break-after: page;
     }
 
-    h1 {
-      font-size: 19px;
-    }
+    header.main-header { padding-bottom: 8px; margin-bottom: 10px; }
+    .kicker { font-size: 11px; }
+    h1 { font-size: 21px; margin: 2px 0; }
+    .subtitle { font-size: 11.5px; }
+    header.sub-header { padding-bottom: 6px; margin-bottom: 10px; }
+    .sub-header-title { font-size: 15px; }
+    .sub-header-badge { font-size: 11px; padding: 2px 9px; }
 
-    .url-banner {
-      padding: 6px 10px;
-      margin-bottom: 7px;
-    }
+    .url-banner { padding: 7px 11px; margin-bottom: 9px; }
+    .url-label { font-size: 11px; margin-bottom: 1px; }
+    .url-badge { font-size: 9.8px; padding: 1px 6px; }
+    .url-link { font-size: 10.6px; }
 
-    .schedule-banner {
-      padding: 6px 10px;
-      margin-bottom: 7px;
-    }
+    .schedule-banner { padding: 7px 11px; margin-bottom: 9px; }
+    .schedule-header { margin-bottom: 3px; }
+    .schedule-title { font-size: 12px; }
+    .schedule-badge { font-size: 9.8px; padding: 1px 6px; }
+    .schedule-allowed { font-size: 10.5px; padding: 2px 8px; }
+    .schedule-subnote { font-size: 10px; margin: 0 0 4px; }
+    .schedule-grid { gap: 3px 10px; padding: 5px 8px; }
+    .schedule-item { font-size: 9.6px; line-height: 1.34; }
 
-    .schedule-grid {
-      padding: 4px 8px;
-      gap: 2.5px 8px;
-    }
+    .step-flow-bar { padding: 5px 12px; margin-bottom: 9px; }
+    .flow-chip { font-size: 10.8px; padding: 2.5px 9px; }
+    .flow-chip span.c-num { width: 16px; height: 16px; font-size: 9.5px; }
+    .flow-arrow { font-size: 13px; }
 
-    .steps,
-    .features-grid {
-      gap: 7px;
-    }
+    .steps-row { grid-template-columns: 1fr 22px 1fr; }
+    .row-connector { font-size: 15px; }
+    .row-bridge { margin: 5px 0; font-size: 10px; }
+    .step { padding: 8px 11px; }
+    .stephead { margin-bottom: 3px; }
+    .num { width: 22px; height: 22px; font-size: 11.5px; }
+    .step-tag { font-size: 9.2px; padding: 1.5px 6px; }
+    h2 { font-size: 14px; }
+    p { margin: 3px 0; font-size: 10.8px; line-height: 1.44; }
 
-    .step,
-    .extra-card,
-    .notice-box {
-      padding: 7px 10px;
-    }
+    .mock { padding: 5.5px 8px; margin: 4px 0; }
+    .mocktitle { font-size: 9.2px; margin-bottom: 3.5px; }
+    .fieldrow { gap: 5px; margin: 3px 0; }
+    .field { padding: 3px 6.5px; font-size: 9.5px; }
+    .field b { font-size: 8.6px; }
+    .course-info-card { padding: 4px 7px; font-size: 9.4px; margin: 3px 0; }
+    .select { padding: 3px 7px; font-size: 9.5px; }
+    .pill { padding: 1px 4.5px; font-size: 8.8px; margin: 1px 0.5px; }
+    .mode-switch-box { padding: 3.5px 7px; margin: 3px 0; font-size: 9.2px; }
+    .slot-warn-mock { padding: 3px 6px; margin-top: 3px; font-size: 8.8px; line-height: 1.32; }
+    .btn { padding: 3px 8px; font-size: 9.5px; }
 
-    .mock {
-      padding: 4.5px 7px;
-      margin: 3.5px 0;
-    }
+    .section-label { font-size: 13px; margin: 0 0 7px; }
+    .section-subtag { font-size: 10px; }
+    .features-grid { gap: 10px; margin-bottom: 11px; }
+    .extra-card { padding: 9px 11px; }
+    .extra-card h3 { font-size: 13px; margin: 0 0 3px; }
+    .tag-ref { font-size: 9px; padding: 1px 6px; }
+    .email-modal-mock { padding: 6px 10px; }
+    .check-circle { width: 18px; height: 18px; font-size: 10px; }
+    .modal-heading { font-size: 10.5px; }
+    .modal-sub { font-size: 8.6px; margin: 1px 0 4px; }
+    .m-btn { font-size: 9px; padding: 2.5px 8px; }
+    .school-tabs { font-size: 9px; padding: 2px; }
+    .school-panel-title { font-size: 9.8px; }
+    .school-panel-desc { font-size: 8.5px; }
 
-    .section-label {
-      margin: 8px 0 5px;
-    }
+    .multiclass-box { padding: 10px 12px; margin-bottom: 11px; }
+    .multiclass-intro { font-size: 10.6px; margin: 0 0 7px; }
+    .mc-diagram { grid-template-columns: 1fr 26px 1fr 26px 1fr; margin-bottom: 8px; }
+    .mc-node { padding: 7px 9px; }
+    .mc-node-badge { font-size: 9.2px; padding: 1.5px 6px; }
+    .mc-node-title { font-size: 11px; }
+    .mc-node-desc { font-size: 9.6px; line-height: 1.38; }
+    .mc-arrow { font-size: 15px; }
+    .mc-rules-grid { gap: 5px 12px; padding: 7px 10px; }
+    .mc-rule-item { font-size: 10px; line-height: 1.4; }
 
-    .notice-box {
-      margin-top: 7px;
-    }
-
-    footer {
-      margin-top: 5px;
-    }
+    .notice-box { padding: 9px 11px; }
+    .notice-grid { gap: 7px; }
+    .notice-item { padding: 6px 9px; }
+    .notice-item > strong { font-size: 10.6px; margin-bottom: 2px; }
+    .notice-item small { font-size: 9.7px; line-height: 1.42; }
+    footer.page-footer { font-size: 9.2px; margin-top: 8px; padding-top: 5px; }
   }
+
+  /* 直接下載 PDF 時的緊湊分頁模式 */
+  body.pdf-exporting {
+    background: #ffffff;
+    font-size: 11px;
+    line-height: 1.44;
+  }
+
+  body.pdf-exporting .doc-wrapper {
+    max-width: 100%;
+    margin: 0;
+    gap: 0;
+  }
+
+  body.pdf-exporting .page-sheet {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 4px 6px;
+  }
+
+  body.pdf-exporting .page-sheet.page-one {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  body.pdf-exporting p { margin: 3px 0; font-size: 10.8px; line-height: 1.44; }
+  body.pdf-exporting .schedule-item { font-size: 9.6px; line-height: 1.34; }
+  body.pdf-exporting .mc-rule-item { font-size: 10px; line-height: 1.4; }
+  body.pdf-exporting .notice-item > strong { font-size: 10.6px; }
+  body.pdf-exporting .notice-item small { font-size: 9.7px; line-height: 1.42; }
 </style>
 </head>
 <body>
@@ -780,8 +1302,8 @@
   <!-- 頂部操作工具列（匯出 PDF 時自動隱藏） -->
   <div class="toolbar no-print" role="region" aria-label="PDF 匯出工具列">
     <div class="toolbar-info">
-      <span>📄 操作說明文件工具列</span>
-      <span class="toolbar-hint">已針對 A4 單頁排版最佳化，支援高畫質向量 PDF 匯出</span>
+      <span>📄 教師簡易操作說明（A4 雙頁版）</span>
+      <span class="toolbar-hint">第 1 頁為標準填報四步驟；第 2 頁為進階功能與多班次共同排課說明</span>
     </div>
     <div class="toolbar-actions">
       <button type="button" class="action-btn" onclick="exportVectorPdf()">
@@ -793,243 +1315,375 @@
     </div>
   </div>
 
-  <!-- 主說明文件內容（PDF 輸出範圍） -->
-  <main class="page" id="guideDocument">
-    <header>
-      <div class="kicker">武陵高中</div>
-      <h1>教師重補修開課調查系統</h1>
-      <div class="subtitle">簡易操作說明｜請依序完成以下四個步驟</div>
-    </header>
+  <!-- 兩頁式主文件容器 -->
+  <div class="doc-wrapper" id="guideDocument">
 
-    <!-- 線上填報系統網址 -->
-    <section class="url-banner" aria-label="填報系統網址">
-      <div class="url-content">
-        <div class="url-label">
-          <span class="url-badge">填報網址</span>
-          <span>線上開課調查系統入口（點擊或複製網址開啟）</span>
-        </div>
-        <a
-          class="url-link"
-          id="systemUrlLink"
-          href="https://script.google.com/macros/s/AKfycbyq1alJRzZaNPpeX_9WxwF9B-XoU5F59LPH6tu9pYHd3gKYN0fmSyfHzxm0tRTl35b_/exec"
-          target="_blank"
-          rel="noopener noreferrer"
-        >https://script.google.com/macros/s/AKfycbyq1alJRzZaNPpeX_9WxwF9B-XoU5F59LPH6tu9pYHd3gKYN0fmSyfHzxm0tRTl35b_/exec</a>
-      </div>
-      <button type="button" class="copy-url-btn no-print" onclick="copySystemUrl()">📋 複製網址</button>
-    </section>
+    <!-- ========================================================================
+         第 1 頁：線上填報網址、開課區間公告、標準填報四步驟（1 ➔ 2 ➔ 3 ➔ 4）
+         ======================================================================== -->
+    <main class="page-sheet page-one">
+      <header class="main-header">
+        <div class="kicker">武陵高中</div>
+        <h1>重補修開課調查系統</h1>
+        <div class="subtitle">教師簡易操作說明（第 1 頁：一般教師／第 1 班教師填報流程）</div>
+      </header>
 
-    <!-- 本次開課區間與排課限制公告區（內容由下方 SCHEDULE_CONFIG 自動同步） -->
-    <section class="schedule-banner" aria-label="本次開課區間與排課限制公告">
-      <div class="schedule-header">
-        <div class="schedule-title">
-          <span class="schedule-badge">開課區間公告</span>
-          <span id="scheduleBannerTitle">本次開課區間與排課限制提醒</span>
+      <!-- 線上填報系統網址 -->
+      <section class="url-banner" aria-label="填報系統網址">
+        <div class="url-content">
+          <div class="url-label">
+            <span class="url-badge">填報網址</span>
+            <span>線上開課調查系統入口（點擊或複製網址開啟）</span>
+          </div>
+          <a
+            class="url-link"
+            id="systemUrlLink"
+            href="https://script.google.com/macros/s/AKfycbyq1alJRzZaNPpeX_9WxwF9B-XoU5F59LPH6tu9pYHd3gKYN0fmSyfHzxm0tRTl35b_/exec"
+            target="_blank"
+            rel="noopener noreferrer"
+          >https://script.google.com/macros/s/AKfycbyq1alJRzZaNPpeX_9WxwF9B-XoU5F59LPH6tu9pYHd3gKYN0fmSyfHzxm0tRTl35b_/exec</a>
         </div>
-        <div class="schedule-allowed" id="scheduleAllowedRange">
-          允許日期：2027/01/25（一）～ 2027/05/14（五）
-        </div>
-      </div>
-      <p class="schedule-subnote" id="scheduleSubNote">
-        請依下列開放區間排課，並務必避開全校考試、輔導課及行事曆禁排時段（系統填報頁下方亦同步顯示提醒）：
-      </p>
-      <div class="schedule-grid" id="scheduleRulesList">
-        <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/02/01（一）12:00 前禁排：</span><span class="schedule-reason">補考日</span></span></div>
-        <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/02/04（四）～02/10（三）全天禁排：</span><span class="schedule-reason">過年不開課</span></span></div>
-        <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/02/23（二）～02/26（五）高一下科目全天禁排：</span><span class="schedule-reason">高二畢旅</span></span></div>
-        <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/03/25（四）～03/26（五）全天禁排：</span><span class="schedule-reason">第一次段考，不排課</span></span></div>
-        <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/02/11（四）～05/14（五）【高二下科目】16:00 前禁排：</span><span class="schedule-reason">避開 1–7 正課（高三無輔導課，16:00 即可開課）</span></span></div>
-        <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/03/01（一）～05/14（五）【高一下科目】17:00 前禁排：</span><span class="schedule-reason">避開正課＋輔導課（高二除畢旅前和 4/1(四) 校慶可提前於 16:00 開課外，其餘皆須避開輔導課）</span></span></div>
-      </div>
-    </section>
+        <button type="button" class="copy-url-btn no-print" onclick="copySystemUrl()">📋 複製網址</button>
+      </section>
 
-    <!-- 四大填報步驟 -->
-    <section class="steps">
-      <article class="step">
-        <div class="stephead">
-          <span class="num">1</span>
-          <h2>登入系統</h2>
-        </div>
-        <p>開啟上方填報網址，輸入個人的「教師代碼」及「Email 代碼」，再按登入。</p>
-        <div class="mock">
-          <div class="mocktitle">登入畫面示意</div>
-          <div class="fieldrow">
-            <div class="field"><b>教師代碼</b>請輸入教師代碼</div>
-            <div class="field"><b>Email 代碼</b>請輸入 Email 代碼</div>
+      <!-- 本次開課區間與排課限制公告區（內容由下方 SCHEDULE_CONFIG 自動同步） -->
+      <section class="schedule-banner" aria-label="本次開課區間與排課限制公告">
+        <div class="schedule-header">
+          <div class="schedule-title">
+            <span class="schedule-badge">開課區間公告</span>
+            <span id="scheduleBannerTitle">本次開課區間與排課限制提醒</span>
           </div>
-          <div style="text-align:right; margin-top:4px;">
-            <span class="btn blue">登入</span>
+          <div class="schedule-allowed" id="scheduleAllowedRange">
+            允許日期：2027/01/25（一）～ 2027/05/14（五）
           </div>
         </div>
-        <p>若無法登入，請確認代碼是否正確，或洽教務處系統管理人員。</p>
-      </article>
+        <p class="schedule-subnote" id="scheduleSubNote">
+          請依下列開放區間排課，並務必避開全校考試、輔導課及行事曆禁排時段（系統填報頁下方亦同步顯示提醒）：
+        </p>
+        <div class="schedule-grid" id="scheduleRulesList">
+          <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/02/01（一）12:00 前禁排：</span><span class="schedule-reason">補考日</span></span></div>
+          <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/02/04（四）～02/10（三）全天禁排：</span><span class="schedule-reason">過年不開課</span></span></div>
+          <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/02/23（二）～02/26（五）高一下科目全天禁排：</span><span class="schedule-reason">高二畢旅</span></span></div>
+          <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/03/25（四）～03/26（五）全天禁排：</span><span class="schedule-reason">第一次段考，不排課</span></span></div>
+          <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/02/11（四）～05/14（五）【高二下科目】16:00 前禁排：</span><span class="schedule-reason">避開 1–7 正課（高三無輔導課，16:00 即可開課）</span></span></div>
+          <div class="schedule-item"><span class="schedule-dot">•</span><span><span class="schedule-date">2027/03/01（一）～05/14（五）【高一下科目】17:00 前禁排：</span><span class="schedule-reason">避開正課＋輔導課（高二除畢旅前和 4/1(四) 校慶可提前於 16:00 開課外，其餘皆須避開輔導課）</span></span></div>
+        </div>
+      </section>
 
-      <article class="step">
-        <div class="stephead">
-          <span class="num">2</span>
-          <h2>選擇課程</h2>
-        </div>
-        <p>依序選擇「年級」與「開課科別」，再選擇要填報的課程名稱及認領班次。</p>
-        <div class="mock">
-          <div class="mocktitle">課程與班次選擇示意</div>
-          <div class="fieldrow">
-            <span class="select"><span>年級：高一</span><span>▼</span></span>
-            <span class="select"><span>開課科別：國文</span><span>▼</span></span>
-          </div>
-          <div class="fieldrow">
-            <div class="field"><b>課程名稱</b>國語文一下（自學班）｜應修節數：12 節</div>
-          </div>
-          <div>
-            <span class="pill active">● 第 1 班（認領班次）</span>
-            <span class="pill">第 2 班</span>
-          </div>
-        </div>
-        <p>確認課程、節數與班次後再填寫時間；<strong>重新登入時須再次點選已填科目</strong>才會顯示原資料。</p>
-      </article>
+      <!-- 四大填報步驟流程導引條 -->
+      <nav class="step-flow-bar" aria-label="填報步驟總覽">
+        <span class="flow-chip"><span class="c-num">1</span>登入系統</span>
+        <span class="flow-arrow">➔</span>
+        <span class="flow-chip"><span class="c-num">2</span>選擇課程與班次</span>
+        <span class="flow-arrow">➔</span>
+        <span class="flow-chip"><span class="c-num">3</span>填寫排課時間與上課方式</span>
+        <span class="flow-arrow">➔</span>
+        <span class="flow-chip"><span class="c-num">4</span>暫存或正式送出</span>
+      </nav>
 
-      <article class="step">
-        <div class="stephead">
-          <span class="num">3</span>
-          <h2>填寫排課時間</h2>
-        </div>
-        <p>設定開始與結束日期區間，勾選可上課節次（可新增多組日期區間），並填寫特殊需求。</p>
-        <div class="mock">
-          <div class="mocktitle">排課時間與節次示意</div>
-          <div class="fieldrow">
-            <div class="field"><b>開始日期</b>2027/01/11</div>
-            <div class="field"><b>結束日期</b>2027/01/16</div>
-          </div>
-          <div class="mocktitle" style="margin-top:3px;">選擇這個區間每天的上課節次</div>
-          <div>
-            <span class="pill">1</span>
-            <span class="pill">2</span>
-            <span class="pill">3</span>
-            <span class="pill">4</span>
-            <span class="pill">5</span>
-            <span class="pill active">✓ 6</span>
-            <span class="pill active">✓ 7</span>
-            <span class="pill active">✓ 8</span>
-            <span class="pill active">✓ 晚</span>
-            <span class="pill active">✓ 9</span>
-            <span class="pill active">✓ 10</span>
-            <span class="pill">11</span>
-          </div>
-          <div class="fieldrow" style="margin-top:3px;">
-            <div class="field"><b>特殊需求與備註</b>如無特殊需求可留白（例：需指定課本或教室需求）</div>
-          </div>
-        </div>
-        <p>請留意系統下方「排課限制提醒」及總節數是否符合課程應修節數。</p>
-      </article>
-
-      <article class="step">
-        <div class="stephead">
-          <span class="num">4</span>
-          <h2>暫存或正式送出</h2>
-        </div>
-        <p>尚未確認完成時可先點「暫存資料」；確認無誤後，請務必點擊「確認並正式送出」。</p>
-        <div class="mock">
-          <div class="mocktitle">送出操作示意</div>
-          <div style="margin:3px 0 6px;">
-            <span class="btn light">暫存資料</span>
-            <span class="btn royal">確認並正式送出</span>
-          </div>
-          <div class="field" style="border-color:var(--green-line); background:var(--green-bg); color:#166534;">
-            <b>✓ 已完成填報</b>你的開課時間資料已成功送出並儲存。
-          </div>
-        </div>
-        <p>送出後可立即檢視填報資料或寄送 Email 副本留存。</p>
-      </article>
-    </section>
-
-    <!-- 兩項實用功能說明與系統畫面示意 -->
-    <div class="section-label">
-      <span>其他實用功能與系統畫面說明</span>
-    </div>
-
-    <section class="features-grid">
-      <!-- 功能一：發送 Email -->
-      <article class="extra-card">
-        <h3>
-          <span>1. 發送 Email</span>
-          <span class="tag-ref">填報完成後寄送通知</span>
-        </h3>
-        <p>可透過系統發送 Email，進行填報結果通知（如附圖畫面所示，完成送出後點擊「發送 EMAIL 副本」即可寄出留存）。</p>
-        <div class="mock">
-          <div class="mocktitle">系統完成視窗示意（如附圖所示）</div>
-          <div class="email-modal-mock">
-            <div class="check-circle">✓</div>
-            <div class="modal-heading">已完成填報</div>
-            <div class="modal-sub">你的開課時間資料已成功送出並儲存。</div>
-            <div class="modal-btn-stack">
-              <div class="m-btn primary">查看填報資料</div>
-              <div class="m-btn highlight">發送 EMAIL 副本</div>
-              <div class="m-btn outline">登出</div>
+      <!-- 第一列：步驟 1 ➔ 步驟 2 -->
+      <section class="steps-row">
+        <!-- 步驟 1 -->
+        <article class="step">
+          <div class="stephead">
+            <div class="stephead-left">
+              <span class="num">1</span>
+              <h2>登入系統</h2>
             </div>
+            <span class="step-tag">身分驗證</span>
           </div>
-        </div>
-      </article>
-
-      <!-- 功能二：查看全校填報狀況 -->
-      <article class="extra-card">
-        <h3>
-          <span>2. 查看全校填報狀況</span>
-          <span class="tag-ref">全校時段查詢</span>
-        </h3>
-        <p>可以查看其他老師已填報的課程與上課時段，掌握全校排課情形（切換至「全校時段」頁籤後，選擇梯次與日期即可查詢）。</p>
-        <div class="mock">
-          <div class="mocktitle">全校時段查詢畫面示意</div>
-          <div class="school-tabs">
-            <div class="school-tab">老師填報</div>
-            <div class="school-tab active">全校時段</div>
-          </div>
-          <div class="school-panel">
-            <div class="school-panel-title">全校已填報時段</div>
-            <div class="school-panel-desc">所有教師都可以查看全校已正式送出的排課時段。</div>
+          <p>開啟上方填報網址，輸入個人的<strong>「教師代碼」</strong>及<strong>「Email 代碼」</strong>，再按登入。</p>
+          <div class="mock">
+            <div class="mocktitle">登入畫面示意</div>
             <div class="fieldrow">
-              <span class="select"><span>梯次：116學年度梯次一</span><span>▼</span></span>
-              <span class="select"><span>日期：全部日期</span><span>▼</span></span>
+              <div class="field"><b>教師代碼</b>請輸入教師代碼</div>
+              <div class="field"><b>Email 代碼</b>請輸入 Email 代碼</div>
             </div>
-            <div style="margin-top:3px;">
-              <span class="btn royal">查詢時段</span>
+            <div style="text-align:right; margin-top:4px;">
+              <span class="btn blue">登入</span>
             </div>
           </div>
-        </div>
-      </article>
-    </section>
+          <p>若無法登入，請確認代碼是否正確，或洽教務處系統管理人員。</p>
+        </article>
 
-    <!-- 填報與重新登入請留意 -->
-    <section class="notice-box" aria-label="填報與重新登入注意事項">
-      <h3>填報與重新登入請留意</h3>
-      <div class="notice-grid">
-        <div class="notice-item important-note">
-          <strong>🔍 重新登入需點選「原填報科目」才會顯示資料</strong>
-          <small>重新登入後畫面預設為空白，系統不會自動跳出已填報內容。請先依序點選您原本填過的「年級 → 開課科別 → 課程名稱」及「班次」，下方才會跳出先前儲存或送出的排課資料。</small>
-        </div>
-        <div class="notice-item">
-          <strong>📌 暫存 ≠ 正式送出</strong>
-          <small>暫存僅保留草稿，仍須點擊「確認並正式送出」，才算完成填報並列入排課。</small>
-        </div>
-        <div class="notice-item">
-          <strong>👥 共用班次協調</strong>
-          <small>若課程為多位教師共同授課，請先與共同授課教師確認共同排課時間後再送出。</small>
-        </div>
-        <div class="notice-item">
-          <strong>✏️ 送出後查看與修改</strong>
-          <small>點選原科目與班次後可查看唯讀明細；如需調整，請按「新增／修改填報資料」並再次送出。</small>
-        </div>
+        <!-- 步驟 1 ➔ 2 箭頭 -->
+        <div class="row-connector" aria-hidden="true">➔</div>
+
+        <!-- 步驟 2 -->
+        <article class="step">
+          <div class="stephead">
+            <div class="stephead-left">
+              <span class="num">2</span>
+              <h2>選擇課程與班次</h2>
+            </div>
+            <span class="step-tag">檢視登記意願人數</span>
+          </div>
+          <p>依序選擇「年級」、「開課科別」與「課程名稱」，即可檢視<strong>登記意願人數</strong>並認領班次。</p>
+          <div class="mock">
+            <div class="mocktitle">課程資訊與班次選擇示意</div>
+            <div class="fieldrow">
+              <span class="select"><span>年級：高一</span><span>▼</span></span>
+              <span class="select"><span>開課科別：國文</span><span>▼</span></span>
+            </div>
+            <div class="course-info-card">
+              <strong>國語文一下（自學班）</strong>｜應修節數：12 節
+              <span class="intent-badge">登記意願人數：28 人</span>
+            </div>
+            <div>
+              <span class="pill active">● 第 1 班（認領班次）</span>
+              <span class="pill">第 2 班（多班次請見第 2 頁）</span>
+            </div>
+          </div>
+          <p>「登記意願人數」供安排開課參考；若課程拆為多班，請由<strong>第 1 班</strong>先填寫共同時間（詳見第 2 頁）。</p>
+        </article>
+      </section>
+
+      <!-- 列間流程銜接指示 -->
+      <div class="row-bridge" aria-hidden="true">⬇ 選妥課程與班次後，接續設定日期、節次與上課方式</div>
+
+      <!-- 第二列：步驟 3 ➔ 步驟 4 -->
+      <section class="steps-row">
+        <!-- 步驟 3 -->
+        <article class="step">
+          <div class="stephead">
+            <div class="stephead-left">
+              <span class="num">3</span>
+              <h2>填寫排課時間與上課方式</h2>
+            </div>
+            <span class="step-tag">自學班預設線上</span>
+          </div>
+          <p>設定開始與結束日期、勾選上課節次（可新增多組區間），並確認自學班上課方式與特殊需求。</p>
+          <div class="mock">
+            <div class="mocktitle">排課時間、上課方式與時段提醒示意</div>
+            <div class="fieldrow">
+              <div class="field"><b>開始日期</b>2027/01/11</div>
+              <div class="field"><b>結束日期</b>2027/01/16</div>
+            </div>
+            <div>
+              <span class="pill">1</span>
+              <span class="pill">2</span>
+              <span class="pill">3</span>
+              <span class="pill">4</span>
+              <span class="pill">5</span>
+              <span class="pill active">✓ 6</span>
+              <span class="pill active">✓ 7</span>
+              <span class="pill active">✓ 8</span>
+              <span class="pill active">✓ 晚</span>
+              <span class="pill active">✓ 9</span>
+              <span class="pill active">✓ 10</span>
+              <span class="pill">11</span>
+            </div>
+            <div class="mode-switch-box">
+              <span>自學班上課方式：<span class="mode-default">預設：線上遠距課程</span></span>
+              <span class="mode-checkbox">☐ 實體上課（需要實體再勾選）</span>
+            </div>
+            <div class="slot-warn-mock">
+              💡 <strong>時段人數提醒：</strong>若同日期同節次已有 2 位教師選填，第 3 位仍可選填並送出（系統僅提醒建議盡量避開，非禁止）。
+            </div>
+          </div>
+          <p>如無特殊需求可留白；請留意總節數是否符合課程應修節數。</p>
+        </article>
+
+        <!-- 步驟 3 ➔ 4 箭頭 -->
+        <div class="row-connector" aria-hidden="true">➔</div>
+
+        <!-- 步驟 4 -->
+        <article class="step">
+          <div class="stephead">
+            <div class="stephead-left">
+              <span class="num">4</span>
+              <h2>暫存或正式送出</h2>
+            </div>
+            <span class="step-tag">務必正式送出</span>
+          </div>
+          <p>尚未確認完成時可先按<strong>「暫存資料」</strong>；確認無誤後，請務必點擊<strong>「確認並正式送出」</strong>。</p>
+          <div class="mock">
+            <div class="mocktitle">送出操作示意</div>
+            <div style="margin:3px 0 6px;">
+              <span class="btn light">暫存資料</span>
+              <span class="btn royal">確認並正式送出</span>
+            </div>
+            <div class="field" style="border-color:var(--green-line); background:var(--green-bg); color:#166534;">
+              <b>✓ 已完成填報</b>你的開課時間資料已成功送出並儲存。
+            </div>
+          </div>
+          <p><strong>暫存 ≠ 正式送出</strong>；正式送出後可查看資料或手動寄送 Email 副本留存（詳見第 2 頁）。</p>
+        </article>
+      </section>
+
+      <footer class="page-footer">第 1 頁／共 2 頁｜基本填報四步驟（其他實用功能、多班次共同排課與重新登入說明請見第 2 頁）</footer>
+    </main>
+
+    <!-- ========================================================================
+         第 2 頁：其他實用功能、多班次共同排課機制、暫存與重新登入注意事項
+         ======================================================================== -->
+    <section class="page-sheet page-two" aria-label="進階功能與多班次共同排課說明">
+      <header class="sub-header">
+        <div class="sub-header-title">武陵高中重補修開課調查系統－進階功能與多班次操作說明</div>
+        <span class="sub-header-badge">第 2 頁／共 2 頁</span>
+      </header>
+
+      <!-- 一、其他實用功能與系統畫面說明 -->
+      <div class="section-label">
+        <span>一、其他實用功能與系統畫面說明</span>
+        <span class="section-subtag">寄送個人留存副本 ／ 查詢全校排課情形</span>
       </div>
+
+      <section class="features-grid">
+        <!-- 功能 1：手動寄送 Email 副本 -->
+        <article class="extra-card">
+          <h3>
+            <span>1. 發送 Email 填報副本</span>
+            <span class="tag-ref">完成送出後手動寄送</span>
+          </h3>
+          <p>送出後可於完成視窗點擊<strong>「發送 EMAIL 副本」</strong>，將本次填報時間與課程明細寄至個人信箱留存。</p>
+          <div class="mock">
+            <div class="mocktitle">系統完成視窗示意</div>
+            <div class="email-modal-mock">
+              <div class="check-circle">✓</div>
+              <div class="modal-heading">已完成填報</div>
+              <div class="modal-sub">你的開課時間資料已成功送出並儲存。</div>
+              <div class="modal-btn-stack">
+                <div class="m-btn primary">查看填報資料</div>
+                <div class="m-btn highlight">發送 EMAIL 副本</div>
+                <div class="m-btn outline">登出</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 功能 2：查看全校填報狀況 -->
+        <article class="extra-card">
+          <h3>
+            <span>2. 查看全校已填報時段</span>
+            <span class="tag-ref">全校時段查詢</span>
+          </h3>
+          <p>切換至<strong>「全校時段」</strong>頁籤，選擇開課梯次與日期，即可查看其他教師已正式送出的課程與時段。</p>
+          <div class="mock">
+            <div class="mocktitle">全校時段查詢畫面示意</div>
+            <div class="school-tabs">
+              <div class="school-tab">老師填報</div>
+              <div class="school-tab active">全校時段</div>
+            </div>
+            <div class="school-panel">
+              <div class="school-panel-title">全校已填報時段</div>
+              <div class="school-panel-desc">所有教師皆可查詢全校已正式送出的排課時段。</div>
+              <div class="fieldrow">
+                <span class="select"><span>梯次：116學年度梯次一</span><span>▼</span></span>
+                <span class="select"><span>日期：全部日期</span><span>▼</span></span>
+              </div>
+              <div style="margin-top:3px;">
+                <span class="btn royal">查詢時段</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 二、多班次共同排課機制（供同一門課程拆分為兩班以上時使用） -->
+      <div class="section-label">
+        <span>二、多班次共同排課機制</span>
+        <span class="section-subtag">僅「同一門課程拆分為兩班或多班，且由不同教師負責」時適用</span>
+      </div>
+
+      <section class="multiclass-box" aria-label="多班次共同排課流程與規則">
+        <p class="multiclass-intro">
+          同一門課程若拆分成兩班或多班，由不同教師分班授課時，各班採<strong>「共同排課時間」</strong>辦理，請依下列順序操作：
+        </p>
+
+        <!-- 視覺化流程圖 -->
+        <div class="mc-diagram" role="img" aria-label="第一班與第二班共同排課流程圖">
+          <div class="mc-node class1">
+            <div>
+              <span class="mc-node-badge">步驟 ① 第 1 班教師（主排課）</span>
+              <div class="mc-node-title">先填寫共同排課時間並「暫存」</div>
+            </div>
+            <div class="mc-node-desc">選擇「第 1 班」填寫共同排課時間後按<strong>暫存</strong>（或送出），後續班次才能開始填報。</div>
+          </div>
+
+          <div class="mc-arrow" aria-hidden="true">➔</div>
+
+          <div class="mc-node sync">
+            <div class="mc-node-title" style="color:#1d4ed8;">🔄 系統自動帶入時間</div>
+            <div class="mc-node-desc">第 2 班及後續班次進入時，自動套用第 1 班設定之共同排課時間，無需重新填寫。</div>
+          </div>
+
+          <div class="mc-arrow" aria-hidden="true">➔</div>
+
+          <div class="mc-node class2">
+            <div>
+              <span class="mc-node-badge">步驟 ② 第 2 班及後續班次教師</span>
+              <div class="mc-node-title">確認共同時間＋填寫個人特殊需求</div>
+            </div>
+            <div class="mc-node-desc"><strong>不可修改</strong>共同排課時間，但可填寫<strong>自己的特殊需求</strong>並各自正式送出。</div>
+          </div>
+        </div>
+
+        <!-- 6 項完整操作規則 -->
+        <div class="mc-rules-grid">
+          <div class="mc-rule-item">
+            <span class="mc-rule-num">1.</span>
+            <span><strong>第 1 班優先：</strong>第 1 班教師必須先選擇第 1 班，填寫共同排課時間並<strong>暫存</strong>。</span>
+          </div>
+          <div class="mc-rule-item">
+            <span class="mc-rule-num">2.</span>
+            <span><strong>解鎖後續班次：</strong>第 1 班完成暫存後，第 2 班及後續班次教師才能開始填報。</span>
+          </div>
+          <div class="mc-rule-item">
+            <span class="mc-rule-num">3.</span>
+            <span><strong>自動帶入時間：</strong>第 2 班及後續班次進入時，系統自動帶入第 1 班共同時間，不需重填。</span>
+          </div>
+          <div class="mc-rule-item">
+            <span class="mc-rule-num">4.</span>
+            <span><strong>權限區分：</strong>第 2 班及後續班次可填寫<strong>自己的特殊需求</strong>，但<strong>不能修改</strong>共同排課時間。</span>
+          </div>
+          <div class="mc-rule-item">
+            <span class="mc-rule-num">5.</span>
+            <span><strong>事前協調一致：</strong>各班次教師仍須事先協調，確認共同排課時間一致。</span>
+          </div>
+          <div class="mc-rule-item">
+            <span class="mc-rule-num">6.</span>
+            <span><strong>同步更新機制：</strong>第 1 班教師後續仍可修改共同排課時間；修改後，其他班次會使用最新的共同排課時間。</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 三、填報、暫存及重新登入注意事項 -->
+      <div class="section-label">
+        <span>三、填報、暫存及重新登入注意事項</span>
+      </div>
+
+      <section class="notice-box" aria-label="填報與重新登入注意事項">
+        <div class="notice-grid">
+          <div class="notice-item important-note">
+            <strong>🔍 重新登入後如何查看或修改既有資料</strong>
+            <small>已有填報紀錄的教師，重新登入後畫面<strong>預設為空白</strong>；請重新選擇原本的<strong>「年級 → 開課科別 → 課程名稱 → 班次」</strong>，即可查看或修改原本資料。</small>
+          </div>
+          <div class="notice-item">
+            <strong>📌 暫存不等於正式送出</strong>
+            <small>暫存僅保留草稿（亦作為第 2 班啟動填報之前置），必須按下<strong>「確認並正式送出」</strong>才算完成正式填報。</small>
+          </div>
+          <div class="notice-item">
+            <strong>🗂️ 各班次資料獨立保存、互不覆蓋</strong>
+            <small>第 1 班及後續班次各自保存自己的填報資料（包含各自的特殊需求與送出紀錄），不會互相覆蓋。</small>
+          </div>
+          <div class="notice-item">
+            <strong>💡 時段人數提醒（非禁止選填）</strong>
+            <small>同一日期、同一節次若已有 2 位教師選填，第 3 位教師<strong>仍可選擇並送出</strong>；系統僅顯示提醒，建議時間允許時盡量避開。</small>
+          </div>
+        </div>
+      </section>
+
+      <footer class="page-footer">第 2 頁／共 2 頁｜武陵高中重補修開課調查系統－教師簡易操作說明</footer>
     </section>
 
-    <footer>本頁介面為操作示意，實際欄位與禁排日期依系統當學期設定為準｜武陵高中重補修開課調查系統</footer>
-  </main>
+  </div>
 
   <div class="toast no-print" id="toastMessage" role="status" aria-live="polite"></div>
 
   <script>
     /* ============================================================================
      * 【日後更新開課區間公告，只需修改這裡的 SCHEDULE_CONFIG 即可】
-     * 畫面完全不會顯示任何編輯按鈕；暑假開課時，只要修改下方文字或把檔案貼給 AI
-     * 說「請幫我把 SCHEDULE_CONFIG 改成暑假開課區間」即可自動同步到畫面與 PDF。
      * ============================================================================ */
     const SCHEDULE_CONFIG = {
       title: "本次開課區間與排課限制提醒",
@@ -1044,18 +1698,6 @@
         { label: "2027/03/01（一）～05/14（五）【高一下科目】17:00 前禁排", desc: "避開正課＋輔導課（高二除畢旅前和 4/1(四) 校慶可提前於 16:00 開課外，其餘皆須避開輔導課）" }
       ]
     };
-
-    /* ----------------------------------------------------------------------------
-     * 【暑假重補修參考範本（純程式碼備忘，不會顯示於畫面上）】
-     * 暑假開課時，可參考以下格式替換上方的 SCHEDULE_CONFIG：
-     *   rules: [
-     *     { label: "高三課程｜6/10 ～ 6/28", desc: "優先辦理，須於暑假前補完避免衝堂" },
-     *     { label: "高一、二（上學期）｜7/01 ～ 7/31", desc: "強烈建議優先排在 7 月份" },
-     *     { label: "高一、二（下學期）｜8/01 ～ 8/30", desc: "配合補考結算，7/28 前無法開課" },
-     *     { label: "全校期末考期間｜6/26 ～ 6/30 禁排", desc: "考試期間不辦理重補修" },
-     *     { label: "高三暑期輔導｜7/20 ～ 8/14 15:00 前禁排", desc: "僅能排在 15:00 之後（可排至晚上）" }
-     *   ]
-     * ---------------------------------------------------------------------------- */
 
     /**
      * 將開課區間設定渲染至畫面
@@ -1142,15 +1784,24 @@
     }
 
     /**
-     * 動態載入 html2pdf.js 直接產生並下載 A4 PDF 檔案
+     * 動態載入 html2pdf.js 直接產生並下載 A4 雙頁 PDF 檔案
      */
     function downloadDirectPdf() {
       const btn = document.getElementById("directPdfBtn");
       const element = document.getElementById("guideDocument");
       if (!element) return;
 
+      const resetState = () => {
+        document.body.classList.remove("pdf-exporting");
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = "<span>⬇️ 直接下載 PDF</span>";
+        }
+      };
+
       const runGenerator = () => {
         try {
+          document.body.classList.add("pdf-exporting");
           if (btn) {
             btn.disabled = true;
             btn.innerHTML = "<span>⏳ 正在產生 PDF...</span>";
@@ -1161,7 +1812,8 @@
             filename: "武陵高中重補修開課調查系統_教師操作說明.pdf",
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, logging: false },
-            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+            pagebreak: { mode: ["css", "legacy"] }
           };
 
           window.html2pdf()
@@ -1169,24 +1821,15 @@
             .from(element)
             .save()
             .then(() => {
-              if (btn) {
-                btn.disabled = false;
-                btn.innerHTML = "<span>⬇️ 直接下載 PDF</span>";
-              }
+              resetState();
               showToast("PDF 檔案已開始下載！");
             })
             .catch(() => {
-              if (btn) {
-                btn.disabled = false;
-                btn.innerHTML = "<span>⬇️ 直接下載 PDF</span>";
-              }
+              resetState();
               exportVectorPdf();
             });
         } catch (err) {
-          if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = "<span>⬇️ 直接下載 PDF</span>";
-          }
+          resetState();
           exportVectorPdf();
         }
       };
@@ -1205,10 +1848,7 @@
       script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
       script.onload = runGenerator;
       script.onerror = () => {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = "<span>⬇️ 直接下載 PDF</span>";
-        }
+        resetState();
         exportVectorPdf();
       };
       document.head.appendChild(script);
